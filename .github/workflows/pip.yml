@@ -3,7 +3,7 @@ name: Python PIP test
 on: push
 
 env:
-  PYTHON_VERSION: 3.8
+  PYTHON_VERSION: 3.8.1
   ARCHITECTURE: x64
 
 jobs:
