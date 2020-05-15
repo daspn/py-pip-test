@@ -17,12 +17,9 @@ jobs:
       - name: Troubleshooting
         id: troubleshooting
         env:
-          MY_WS: ${{ env.GITHUB_WORKSPACE }}
-          ANOTHER_VAR: Testing
+          MY_WS: Testing
         run: |
-          echo "GITHUB_WORKSPACE is $MY_WS"
-          echo "GITHUB_WORKSPACE is $GITHUB_WORKSPACE"
-          echo "ANOTHER_VAR is $ANOTHER_VAR"
+          echo "MY_WS is $MY_WS"
 
       - name: Environment definition
         id: environment-set
