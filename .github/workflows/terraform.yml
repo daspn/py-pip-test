@@ -14,12 +14,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set GITHUB_WORKSPACE #https://tinyurl.com/y725hqjk
+        run: echo ::set-env name=WORKSPACE::$GITHUB_WORKSPACE
+
       - name: Troubleshooting
         id: troubleshooting
         env:
-          MY_WS: Testing
+          MY_WS: ${{ env.WORKSPACE }}
         run: |
-          echo "MY_WS is $MY_WS"
+          echo "GITHUB_WORKSPACE is $MY_WS"
 
       - name: Environment definition
         id: environment-set
@@ -38,21 +41,21 @@ jobs:
         with:
           tf_actions_version: ${{ env.TF_VERSION }}
           tf_actions_subcommand: fmt
-          args: -recursive ${{ env.GITHUB_WORKSPACE }}/deployment/terraform
+          args: -recursive ${{ env.WORKSPACE }}/deployment/terraform
 
       - name: Terraform Validate
         uses: solidalek/terraform-github-actions@master
         with:
           tf_actions_version: ${{ env.TF_VERSION }}
           tf_actions_subcommand: validate
-          args: ${{ env.GITHUB_WORKSPACE }}/deployment/terraform
+          args: ${{ env.WORKSPACE }}/deployment/terraform
 
       - name: Terraform Init
         uses: solidalek/terraform-github-actions@master
         with:
           tf_actions_version: ${{ env.TF_VERSION }}
           tf_actions_subcommand: init
-          args: ${{ env.GITHUB_WORKSPACE }}/deployment/terraform
+          args: ${{ env.WORKSPACE }}/deployment/terraform
 
       - name: Terraform Plan
         id: terraform-plan
@@ -60,4 +63,4 @@ jobs:
         with:
           tf_actions_version: ${{ env.TF_VERSION }}
           tf_actions_subcommand: plan
-          args: -var-file ${{ steps.tfvars.outputs.tfvars_file }} ${{ env.GITHUB_WORKSPACE }}/deployment/terraform
+          args: -var-file ${{ steps.tfvars.outputs.tfvars_file }} ${{ env.WORKSPACE }}/deployment/terraform
