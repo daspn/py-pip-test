@@ -25,7 +25,7 @@ jobs:
       - name: Generate tfvars Path
         id: tfvars
         run: |
-          echo "::set-output name=tfvars_file::deployment/terraform/environments/$ENVIRONMENT.tfvars"
+          echo "::set-output name=tfvars_file::environments/$ENVIRONMENT.tfvars"
 
       - uses: actions/checkout@v2
 
