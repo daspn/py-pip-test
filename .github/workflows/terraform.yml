@@ -20,6 +20,7 @@ jobs:
           MY_WS: ${{ env.GITHUB_WORKSPACE }}
         run: |
           echo "GITHUB_WORKSPACE is $MY_WS"
+          echo "GITHUB_WORKSPACE is $GITHUB_WORKSPACE"
 
       - name: Environment definition
         id: environment-set
