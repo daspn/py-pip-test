@@ -31,21 +31,21 @@ jobs:
         with:
           tf_actions_version: ${{ env.TF_VERSION }}
           tf_actions_subcommand: fmt
-          args: -recursive ${{ GITHUB_WORKSPACE }}/deployment/terraform
+          args: -recursive ${{ env.GITHUB_WORKSPACE }}/deployment/terraform
 
       - name: Terraform Validate
         uses: solidalek/terraform-github-actions@master
         with:
           tf_actions_version: ${{ env.TF_VERSION }}
           tf_actions_subcommand: validate
-          args: ${{ GITHUB_WORKSPACE }}/deployment/terraform
+          args: ${{ env.GITHUB_WORKSPACE }}/deployment/terraform
 
       - name: Terraform Init
         uses: solidalek/terraform-github-actions@master
         with:
           tf_actions_version: ${{ env.TF_VERSION }}
           tf_actions_subcommand: init
-          args: ${{ GITHUB_WORKSPACE }}/deployment/terraform
+          args: ${{ env.GITHUB_WORKSPACE }}/deployment/terraform
 
       - name: Terraform Plan
         id: terraform-plan
@@ -53,4 +53,4 @@ jobs:
         with:
           tf_actions_version: ${{ env.TF_VERSION }}
           tf_actions_subcommand: plan
-          args: -var-file ${{ steps.tfvars.outputs.tfvars_file }} ${{ GITHUB_WORKSPACE }}/deployment/terraform
+          args: -var-file ${{ steps.tfvars.outputs.tfvars_file }} ${{ env.GITHUB_WORKSPACE }}/deployment/terraform
